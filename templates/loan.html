@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loan Approval Prediction System</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a2e 0%, #13158a 50%, #1a0a3e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(168, 85, 201, 0.2);
+            border: 1px solid rgba(168, 85, 201, 0.5);
+            color: #c084fc;
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .glow {
+            font-size: clamp(28px, 5vw, 52px);
+            color: #fff;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px #fff,
+                    0 0 20px #fff,
+                    0 0 30px #4f08dd,
+                    0 0 40px #4f08dd,
+                    0 0 50px #4f08dd,
+                    0 0 60px #4f08dd,
+                    0 0 70px #4f08dd;
+            }
+            to {
+                text-shadow:
+                    0 0 20px #fff,
+                    0 0 30px #fff,
+                    0 0 40px #2b21ea,
+                    0 0 50px #2b21ea,
+                    0 0 60px #2b21ea,
+                    0 0 70px #2b21ea,
+                    0 0 80px #2b21ea;
+            }
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 15px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #a855c9;
+            border: none;
+            color: #fff;
+            padding: 14px 48px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            letter-spacing: 0.4px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #9333ea;
+            transform: scale(1.03);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        .powered {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 12px;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 16px 24px;
+            min-width: 120px;
+        }
+
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #c084fc;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="badge">🤖 AI Powered</div>
+
+        <h1 class="glow">Loan Approval<br>Prediction System</h1>
+
+        <p class="subtitle">
+            Get instant loan eligibility predictions powered by<br>
+            Machine Learning — fast, accurate, and reliable.
+        </p>
+
+        <a href="{{ url_for('approval') }}">
+            <button class="btn-primary">Analyse Now →</button>
+        </a>
+
+        <p class="powered">Powered by Machine Learning · Random Forest Model</p>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">ML</div>
+                <div class="stat-label">Model</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Fast</div>
+                <div class="stat-label">Prediction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Automated</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
