@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loan Approval Prediction Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2e 0%, #13158a 50%, #1a0a3e 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1.page-title {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 28px;
+            padding: 0;
+        }
+
+        .msg-box {
+            background: rgba(168, 85, 201, 0.15) !important;
+            border: 1px solid #a855c9;
+            border-radius: 8px;
+            padding: 10px 14px;
+            max-width: 620px;
+            margin: 0 auto 18px;
+            color: #d8a0f0;
+            font-size: 14px;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 28px 32px;
+            max-width: 620px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 5px;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.07) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.2s, background 0.2s;
+            margin-bottom: 16px;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        select option {
+            background: #1a0a3e;
+            color: #fff;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #a855c9;
+            background: rgba(168, 85, 201, 0.1) !important;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        button[type="submit"] {
+            grid-column: 1 / -1;
+            width: 100%;
+            padding: 13px;
+            background: #a855c9 !important;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 4px;
+            transition: background 0.2s, transform 0.1s;
+            letter-spacing: 0.3px;
+        }
+
+        button[type="submit"]:hover { background: #9333ea !important; }
+        button[type="submit"]:active { transform: scale(0.98); }
+
+        .result-box {
+            max-width: 620px;
+            margin: 20px auto 0;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+            color: #c084fc;
+            background: rgba(168, 85, 201, 0.12) !important;
+            border: 1px solid rgba(168, 85, 201, 0.3);
+            border-radius: 10px;
+            padding: 16px 24px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: rgba(255, 255, 255, 0.8); }
+
+        .powered {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.25);
+            font-size: 12px;
+            margin-top: 14px;
+        }
+
+        br { display: none; }
+
+        @media (max-width: 520px) {
+            form { grid-template-columns: 1fr; padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">Approval Prediction Form</h1>
+
+    {% if message %}
+    <p class="msg-box">{{ message }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('predict') }}" method="POST">
+
+        <div>
+            <label>Name</label>
+            <input type="text" name="name"
+                value="{{ form_data.name if form_data else '' }}"
+                placeholder="Ashok" required>
+        </div>
+
+        <div>
+            <label>Age</label>
+            <input type="number" name="age"
+                value="{{ form_data.age if form_data else '' }}"
+                placeholder="25" required>
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <input type="text" name="gender"
+                value="{{ form_data.gender if form_data else '' }}"
+                placeholder="Male / Female" required>
+        </div>
+
+        <div>
+            <label>Marital Status</label>
+            <input type="text" name="Martial_status"
+                value="{{ form_data.Martial_status if form_data else '' }}"
+                placeholder="Married / Unmarried" required>
+        </div>
+
+        <div>
+            <label>Education</label>
+            <input type="text" name="education"
+                value="{{ form_data.education if form_data else '' }}"
+                placeholder="Graduate" required>
+        </div>
+
+        <div>
+            <label>Annual Income (₹)</label>
+            <input type="number" name="annual_income"
+                value="{{ form_data.annual_income if form_data else '' }}"
+                placeholder="500000" required>
+        </div>
+
+        <div>
+            <label>Employment Type</label>
+            <input type="text" name="Employment_type"
+                value="{{ form_data.Employment_type if form_data else '' }}"
+                placeholder="Employed" required>
+        </div>
+
+        <div>
+            <label>Years of Experience</label>
+            <input type="number" name="years_of_experience"
+                value="{{ form_data.years_of_experience if form_data else '' }}"
+                placeholder="5" required>
+        </div>
+
+        <div>
+            <label>Dependents</label>
+            <input type="number" name="Dependents"
+                value="{{ form_data.Dependents if form_data else '0' }}"
+                placeholder="0" required>
+        </div>
+
+        <div>
+            <label>Co-applicant Income (₹)</label>
+            <input type="number" step="any" name="Coapplicant_Income"
+                value="{{ form_data.Coapplicant_Income if form_data else '0' }}"
+                placeholder="0" required>
+        </div>
+
+        <div>
+            <label>Existing Loan</label>
+            <input type="number" name="Existing_loan"
+                value="{{ form_data.Existing_loan if form_data else '0' }}"
+                placeholder="0" required>
+        </div>
+
+        <div>
+            <label>Loan Amount (₹)</label>
+            <input type="number" name="Loan_amount"
+                value="{{ form_data.Loan_amount if form_data else '' }}"
+                placeholder="200000" required>
+        </div>
+
+        <div>
+            <label>Loan Term (months)</label>
+            <input type="number" name="Loan_term"
+                value="{{ form_data.Loan_term if form_data else '' }}"
+                placeholder="120" required>
+        </div>
+
+        <div>
+            <label>Credit History</label>
+            <input type="number" name="Credit_history"
+                value="{{ form_data.Credit_history if form_data else '' }}"
+                placeholder="1" required>
+        </div>
+
+        <div>
+            <label>Property Area</label>
+            <select name="Property_Area">
+                <option value="Urban"     {% if form_data and form_data.Property_Area == 'Urban'     %}selected{% endif %}>Urban</option>
+                <option value="Semiurban" {% if form_data and form_data.Property_Area == 'Semiurban' %}selected{% endif %}>Semiurban</option>
+                <option value="Rural"     {% if form_data and form_data.Property_Area == 'Rural'     %}selected{% endif %}>Rural</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Employment Status</label>
+            <select name="Employment_Status">
+                <option value="Salaried"      {% if form_data and form_data.Employment_Status == 'Salaried'      %}selected{% endif %}>Salaried</option>
+                <option value="Self-Employed" {% if form_data and form_data.Employment_Status == 'Self-Employed' %}selected{% endif %}>Self-Employed</option>
+                <option value="Unemployed"    {% if form_data and form_data.Employment_Status == 'Unemployed'    %}selected{% endif %}>Unemployed</option>
+            </select>
+        </div>
+
+        <button type="submit" class="full-width">Predict Loan Approval</button>
+
+    </form>
+
+    {% if prediction_text %}
+    <div class="result-box">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+
+    <p class="powered">Powered by Machine Learning · Random Forest Model</p>
+    <a href="{{ url_for('loan') }}" class="back-link">← Back to Home</a>
+
+</body>
+</html>
